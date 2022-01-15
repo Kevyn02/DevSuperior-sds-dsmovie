@@ -1,7 +1,16 @@
+import { useEffect, useState } from "react";
+
+import { api } from "utils/api";
+
 import { MovieCard } from "components/MovieCard";
 import { Pagination } from "components/Pagination";
+import { Movie, MoviePage } from "types/movie";
 
 export function Listing() {
+  api.get("/movies?size=12&page=0").then((response) => {
+    console.log(response.data);
+  });
+
   return (
     <>
       <Pagination />
