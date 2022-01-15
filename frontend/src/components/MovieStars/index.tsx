@@ -17,18 +17,18 @@ export function MovieStars({ score }: Props) {
     <div className="dsmovie-stars-container">
       {Array(qtStarFull)
         .fill(0)
-        .map(() => {
-          return <StarFull />;
+        .map((_, index) => {
+          return <StarFull key={`StarFull-${index}`} />;
         })}
       {Array(qtStarHall)
         .fill(0)
-        .map(() => {
-          return <StarHalf />;
+        .map((_, index) => {
+          return <StarHalf key={`StarHalf-${index}`} />;
         })}
       {Array(qtStarEmpty)
         .fill(0)
-        .map(() => {
-          return <StarEmpty />;
+        .map((_, index) => {
+          return <StarEmpty key={`StarEmpty-${index}`} />;
         })}
     </div>
   );
