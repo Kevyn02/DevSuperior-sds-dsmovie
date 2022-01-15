@@ -16,14 +16,31 @@ export function Listing() {
         // console.log(response.data);
         setData(response.data);
       });
-  }, [data?.number]);
+  }, [currentPage]);
+
+  if (!data) {
+    return null;
+  }
+
+  function handleSwitchPages(page: number) {
+    if (page === -1 && currentPage === 0) {
+      return;
+    } else if (page === 1 && currentPage === data?.totalPages) {
+      return;
+    }
+    setCurrentPage(currentPage + page);
+  }
 
   return (
     <>
-      <Pagination />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={data.totalPages}
+        handleSwitchPages={handleSwitchPages}
+      />
       <div className="container">
         <div className="row">
-          {data?.content.map((movie) => {
+          {data.content.map((movie) => {
             return (
               <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3">
                 <MovieCard movie={movie} />
