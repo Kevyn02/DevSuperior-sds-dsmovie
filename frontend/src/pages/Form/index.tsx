@@ -1,27 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Movie } from "types/movie";
+import { api } from "utils/api";
 
 import "./styles.css";
 
 export function Form() {
-  const movie = {
-    id: 1,
-    image:
-      "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
-    title: "The Witcher",
-    count: 2,
-    score: 4.5,
-  };
+  const { movieId } = useParams();
+
+  const [movie, setMovie] = useState<Movie | undefined>();
+
+  useEffect(() => {
+    api.get<Movie>(`movies/${movieId}`).then((response) => {
+      setMovie(response.data);
+    });
+  }, [movieId]);
 
   return (
     <div className="dsmovie-form-container">
       <img
         className="dsmovie-movie-card-image"
-        src={movie.image}
-        alt={movie.title}
+        src={movie?.image}
+        alt={movie?.title}
       />
       <div className="dsmovie-card-bottom-container">
-        <h3>{movie.title}</h3>
+        <h3>{movie?.title}</h3>
         <form className="dsmovie-form">
           <div className="form-group dsmovie-form-group">
             <label htmlFor="email">Informe seu email</label>
