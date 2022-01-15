@@ -7,8 +7,11 @@ import { Pagination } from "components/Pagination";
 import { Movie, MoviePage } from "types/movie";
 
 export function Listing() {
-  api.get("/movies?size=12&page=0").then((response) => {
+  const [pageNumber, setPageNumber] = useState(0);
+
+  api.get<MoviePage>("/movies?size=12&page=0").then((response) => {
     console.log(response.data);
+    setPageNumber(response.data.totalPages);
   });
 
   return (
