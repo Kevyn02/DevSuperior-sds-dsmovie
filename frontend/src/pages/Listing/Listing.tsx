@@ -4,7 +4,7 @@ import { api } from "utils/api";
 
 import { MovieCard } from "components/MovieCard";
 import { Pagination } from "components/Pagination";
-import { Movie, MoviePage } from "types/movie";
+import { MoviePage } from "types/movie";
 
 export function Listing() {
   const [data, setData] = useState<MoviePage | undefined>();
